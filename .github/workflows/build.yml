@@ -11,29 +11,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Baixar projeto
+        uses: actions/checkout@v4
 
-      - name: Extrair projeto
-        run: unzip -q h3d.zip
-
-      - uses: actions/setup-java@v4
+      - name: Configurar Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
+      - name: Extrair projeto
+        run: unzip -q h3d.zip
 
-      - name: Instalar ferramentas Android
-        run: sdkmanager "platforms;android-34" "build-tools;34.0.0" "ndk;26.3.11579264" "cmake;3.22.1"
+      - name: Configurar Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          yes | sdkmanager --licenses || true
+          sdkmanager --install \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            "ndk;26.3.11579264" \
+            "cmake;3.22.1"
 
-      - uses: gradle/actions/setup-gradle@v4
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
       - name: Compilar APK
-        run: gradle -p h3d assembleDebug --no-daemon
+        run: |
+          cd h3d
+          gradle assembleDebug --no-daemon
 
-      - uses: actions/upload-artifact@v4
+      - name: Disponibilizar APK
+        uses: actions/upload-artifact@v4
         with:
           name: h3d-debug-apk
           path: h3d/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
