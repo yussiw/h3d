@@ -44,7 +44,7 @@ jobs:
             "cmake;3.22.1"
 
       - name: Extrair projeto
-        run: unzip -q h3d.zip
+        run: unzip -oq h3d.zip
 
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
