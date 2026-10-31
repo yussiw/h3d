@@ -44,7 +44,17 @@ jobs:
             "cmake;3.22.1"
 
       - name: Extrair projeto
-        run: unzip -oq h3d.zip
+        run: unzip -oq h3d.zip -d .
+
+      - name: Verificar estrutura
+        run: |
+          echo "Conteúdo da raiz:"
+          ls -la
+
+          if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
+            echo "ERRO: settings.gradle não encontrado na raiz!"
+            exit 1
+          fi
 
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -52,11 +62,11 @@ jobs:
           gradle-version: '8.9'
 
       - name: Compilar APK
-        run: gradle -p h3d assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
       - name: Exportar APK
         uses: actions/upload-artifact@v4
         with:
           name: h3d-debug-apk
-          path: h3d/app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
