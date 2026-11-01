@@ -12,10 +12,6 @@ H3D Engine
   <img src="https://img.shields.io/badge/3D-Real--Time-8A2BE2?style=for-the-badge" />
 </p>---
 
-<p align="center">
-  <img src=".github/TEST.gif" width="100%">
-</p>
-
 About
 
 H3D is a 3D engine designed to make game development more accessible through a simple scripting interface and support for external 3D assets.
