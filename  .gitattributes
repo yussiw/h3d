@@ -1,0 +1,12 @@
+# C++ como linguagem principal
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+*.h linguist-language=C++
+
+# Lua como linguagem secundária
+*.lua linguist-language=Lua
+
+# Ignorar imagens e documentação nas estatísticas
+*.png linguist-vendored
+*.jpg linguist-vendored
+*.gif linguist-vendored
