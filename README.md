@@ -2,7 +2,7 @@ H3D Engine
 
 ![Language](https://img.shields.io/github/languages/top/yussiw/h3d?style=for-the-badge)
 ![Languages](https://img.shields.io/github/languages/count/yussiw/h3d?style=for-the-badge)
-![License](https://img.shields.io/github/license/yussiw/h3d?style=for-the-badge) 
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 <p align="center">
   <strong>A lightweight 3D engine for creating interactive experiences.</strong>
