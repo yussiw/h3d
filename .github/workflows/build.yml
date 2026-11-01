@@ -1,6 +1,9 @@
 name: Build h3d
 
 on:
+  push:
+    paths:
+      - 'h3d.zip'
   workflow_dispatch:
 
 jobs:
